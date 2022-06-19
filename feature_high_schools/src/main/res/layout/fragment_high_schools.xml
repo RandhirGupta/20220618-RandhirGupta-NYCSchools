@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+      android:id="@+id/layoutContent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:id="@+id/tvToggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:padding="@dimen/dp_6"
+        android:text="@string/switch_between"
+        android:textColor="@color/retry_button_color"/>
+
+      <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvToggle"/>
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHighSchools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvToggle"
+        android:scrollbars="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_high_school"/>
+    </RelativeLayout>
+
+    <LinearLayout
+      android:id="@+id/errorLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:background="@color/error_background_color"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:padding="@dimen/dp_16"
+      android:visibility="gone">
+
+      <TextView
+        android:id="@+id/tvErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/error_message"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp_54"/>
+
+      <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_44"
+        android:background="@color/retry_button_color"
+        android:gravity="center"
+        android:padding="@dimen/dp_16"
+        android:text="@string/retry"
+        android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <RelativeLayout
+      android:id="@+id/loadingLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:animateLayoutChanges="true"
+      android:background="@color/background_color"
+      android:visibility="gone">
+
+      <ImageButton
+        android:id="@+id/ivLoader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_loading"
+        android:indeterminate="true"
+        android:interpolator="@anim/linear_interpolator"
+        tools:ignore="ContentDescription"/>
+    </RelativeLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
