@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
   id(Plugins.androidApplication)
   id(Plugins.kotlinAndroid)
@@ -19,9 +22,23 @@ android {
   }
 
   buildTypes {
+
+    debug {
+      val securePropertiesFile = rootProject.file("config/debug/secure.properties")
+      val secureProperties = Properties().apply { load(FileInputStream(securePropertiesFile)) }
+
+      buildConfigField("String", "GOOGLE_MAPS_KEY", secureProperties.getProperty("google_maps_api_key"))
+    }
+
     release {
       isDebuggable = false
       isMinifyEnabled = true
+
+      val securePropertiesFile = rootProject.file("config/release/secure.properties")
+      val secureProperties = Properties().apply { load(FileInputStream(securePropertiesFile)) }
+
+      buildConfigField("String", "GOOGLE_MAPS_KEY", secureProperties.getProperty("google_maps_api_key"))
+
       proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
   }
